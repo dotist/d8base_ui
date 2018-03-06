@@ -1,0 +1,52 @@
+@font-face {
+  font-family: 'Montserrat';
+  url('../fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
+}
+
+font-family-main = 'Montserrat';
+font-main = font-family-main
+
+html body
+  main
+  header
+  footer
+    *
+      font-family font-family-main
+      font-weight: 400
+      font-size 4vw
+      +above(2)
+        font-size 3vw
+      +above(3)
+        font-size 2vw
+
+
+  header, footer
+    *
+      font-weight: 500
+
+body
+  p
+    margin 1em 0
+
+a, a:link, a:visited
+  color inherit
+  text-decoration: none
+
+
+// Menu link style.
+link-style-2()
+  Color = #ffffff
+  a, a:link, a:visited
+    color Color
+    font-size 2.7vw
+    border-bottom 0.75px solid rgba(Color, 0.0)
+    transition border-color 0.2s ease-in
+    +above(2)
+      font-size 1.7vw
+    +above(3)
+      font-size 1.1vw
+  a:hover
+    text-decoration: none
+    border-bottom 0.75px solid Color
+.tabs
+  link-style-2();

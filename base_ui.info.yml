@@ -1,0 +1,14 @@
+name: base_ui
+type: theme
+description: 'Drupal 8 Base Theme'
+package: base_ui
+core: 8.x
+libraries:
+  - base_ui/global-theme
+
+base theme: stable
+
+regions:
+  content: Content
+  header: Header
+  footer: Footer

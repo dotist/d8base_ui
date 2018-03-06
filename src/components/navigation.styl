@@ -1,0 +1,34 @@
+Height = 50px
+
+header
+footer
+  img
+    height 35px
+    vertical-align: middle
+  .region
+    height Height
+    display: table
+    > *
+      display: table-cell
+      vertical-align: middle;
+      padding 0 5px
+      > *
+        display: table-cell;
+        vertical-align: top;
+
+nav
+  ul
+    li
+      display table-cell
+      padding 0 5px
+
+// Burger-nav styling.
+.dropdown-target
+  display block !important
+
+header
+  position relative
+  .dropdown-menu
+    right 3px
+    position: absolute
+    margin-top 15px

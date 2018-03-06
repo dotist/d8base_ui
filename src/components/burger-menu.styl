@@ -1,0 +1,99 @@
+// Burger menu button
+BurgerThickness = 3px;
+BurgerWidth = 22px
+.burger {
+	width: BurgerWidth;
+	display: block !important;
+  border: 0;
+	background: none;
+	outline: 0;
+	padding: 0;
+	cursor: pointer;
+
+	border-bottom: BurgerThickness solid currentColor;
+
+	transition: border-bottom 0.2s ease-in-out;
+	-webkit-transition: border-bottom 0.2s ease-in-out;
+
+	// Fix for extra space in Firefox
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+
+	&:before {
+		content: "";
+		display: block;
+		border-bottom: BurgerThickness solid currentColor;
+		width: 100%;
+		margin-bottom: 5px;
+		transition: transform 0.2s ease-in-out;
+	}
+
+	&:after {
+		content: "";
+		display: block;
+		border-bottom: BurgerThickness solid currentColor;
+		width: 100%;
+		margin-bottom: 5px;
+		transition: transform 0.2s ease-in-out;
+	}
+}
+
+.burger-check:checked ~ .burger {
+  border-bottom: BurgerThickness solid transparent;
+  transition: border-bottom 0.2s ease-in-out;
+
+  &:before {
+    transform: rotate(-45deg) translateY(3px) translateX(-5px);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:after {
+    transform: rotate(45deg) translateY(-1px) translateX(-3px);
+    transition: transform 0.2s ease-in-out;
+  }
+}
+
+// * * *.dropdown-target * * *f
+$navigation__transition = max-height 1s ease-out;
+
+.dropdown-target {
+  overflow: hidden;
+  max-height: 0;
+  visibility: hidden;
+  transition: $navigation__transition;
+}
+.burger-check {
+  display: none !important;
+}
+
+.burger-check:checked ~ .dropdown-target {
+  max-height: 500px;
+  visibility: inherit;
+  transition: $navigation__transition;
+}
+
+
+small {
+  font-size: 14px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  font-size: 25px;
+  padding: 5px 0;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
