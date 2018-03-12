@@ -22,7 +22,7 @@ gulp.task('stylus', function() {
       lost(),
       autoprefixer()
     ]))
-    .pipe(sourcemaps.write('./'))
+    .pipe(sourcemaps.write())
     .pipe(concat('styles.css'))
     .pipe(gulp.dest('css/'));
 });
