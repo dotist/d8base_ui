@@ -9,6 +9,7 @@
  * Implements hook_preprocess_HOOK() for html.html.twig.
  */
 function base_ui_preprocess_html(array &$variables) {
+  $t=1;
   /* Add class to html tag */
   //$variables['html_attributes']->addClass('no-js');
 
@@ -41,23 +42,6 @@ function base_ui_preprocess_page(array &$variables) {
 
 }
 
-/**
- * Implements hook_theme_suggestions_page_alter().
- */
-function base_ui_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-
-}
-
-/**
- * Implements hook_theme_suggestions_node_alter().
- */
-function base_ui_theme_suggestions_node_alter(array &$suggestions, array $variables) {
-  /*$node = $variables['elements']['#node'];
-
-  if ($variables['elements']['#view_mode'] == "full") {
-
-  }*/
-}
 
 /**
  * Implements hook_preprocess_HOOK() for Block document templates.
@@ -67,37 +51,23 @@ function base_ui_preprocess_block(array &$variables) {
 }
 
 /**
- * Implements hook_theme_suggestions_field_alter().
- */
-function base_ui_theme_suggestions_field_alter(array &$suggestions, array $variables) {
-  /*$element = $variables['element'];
-  $suggestions[] = 'field__' . $element['#view_mode'];
-  $suggestions[] = 'field__' . $element['#view_mode'] . '__' . $element['#field_name'];*/
-}
-
-/**
- * Implements hook_theme_suggestions_field_alter().
- */
-function base_ui_theme_suggestions_fieldset_alter(array &$suggestions, array $variables) {
-  /*$element = $variables['element'];
-  if (isset($element['#attributes']['class']) && in_array('form-composite', $element['#attributes']['class'])) {
-    $suggestions[] = 'fieldset__form_composite';
-  }*/
-}
-
-/**
  * Implements hook_preprocess_node().
  */
 function base_ui_preprocess_node(array &$variables) {
+  $node = $variables['elements']['#node'];
+  $type = $node->getType();
+  $variables['attributes']['class'][] = 'content';
+  $variables['attributes']['class'][] = 'content-type-' . $type;
   // Default to turning off byline/submitted.
   //$variables['display_submitted'] = FALSE;
 }
 
 /**
- * Implements hook_theme_suggestions_views_view_alter().
+ * Implements hook_preprocess_form().
  */
-function base_ui_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
-
+function base_ui_preprocess_views_view(array &$variables) {
+  $t=1;
+  //$variables['attributes']['novalidate'] = 'novalidate';
 }
 
 /**
@@ -131,15 +101,32 @@ function base_ui_preprocess_details(array &$variables) {
 }
 
 /**
- * Implements hook_theme_suggestions_details_alter().
+ * Implements hook_preprocess_menu_local_task().
  */
-function base_ui_theme_suggestions_details_alter(array &$suggestions, array $variables) {
-
+function base_ui_preprocess_menu_local_task(array &$variables) {
+  //$variables['element']['#link']['url']->setOption('attributes', ['class'=>'rounded']);
 }
 
 /**
  * Implements hook_preprocess_menu_local_task().
  */
-function base_ui_preprocess_menu_local_task(array &$variables) {
-  //$variables['element']['#link']['url']->setOption('attributes', ['class'=>'rounded']);
+function base_ui_preprocess_page_title(array &$variables) {
+  $path = \Drupal::service('path.current')->getPath();
+  $array = explode('/', $path);
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    // Modify page title on node edit pages.
+    if (
+      (isset($array[1]) && isset($array[2]) && isset($array[3]))
+    &&
+      ($array[1] == 'node' && is_numeric((int) $array[2]) && $array[3] == 'edit')
+    ) {
+      $title = $variables['title'];
+      $bundle_label = \Drupal::entityTypeManager()
+        ->getStorage('node_type')
+        ->load($node->bundle())
+        ->label();
+      $variables['title'] = 'Edit ' . $bundle_label;
+    }
+  }
+
 }
