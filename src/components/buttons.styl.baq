@@ -1,0 +1,45 @@
+buttonStyle1()
+  background-color: COLOR_ACCENT_1
+  border 1px solid transparent
+  color COLOR_WHITE
+
+buttonStyle2()
+  border 1px solid COLOR_ACCENT_1
+  background-color COLOR_WHITE
+  color COLOR_ACCENT_1
+
+buttonStyle3()
+  border 1px solid transparent
+  background-color COLOR_GREY_LIGHT
+  color COLOR_GREY
+
+buttonStyle4()
+  border 1px solid transparent
+  background-color COLOR_GREY_LIGHT
+  color COLOR_BLACK
+
+buttonStyle()
+  buttonStyle1()
+  &:hover
+    buttonStyle2()
+
+buttonStyle_alt()
+  buttonStyle2()
+  &:hover
+    buttonStyle1()
+
+buttonStyle_secondary()
+  buttonStyle3()
+  &:hover
+    buttonStyle4()
+
+
+body
+  .button
+  .button:visited
+  button
+  input[type='button']
+  input[type='reset']
+  input[type='submit']
+    buttonStyle()
+    transition all 100ms ease-in

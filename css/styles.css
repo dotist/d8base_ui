@@ -7,21 +7,21 @@
 html body main *,
 html body header *,
 html body footer * {
-  font-family: 'Montserrat';
-  font-weight: 400;
-  font-size: 4vw;
+  font-family: 'Helvetica';
 }
-@media only screen and (min-width: 600px) {
-  html body main *,
-  html body header *,
-  html body footer * {
-    font-size: 3vw;
-  }
+html body header *,
+html body footer *,
+html body header font-weight: 400,
+html body footer font-weight: 400,
+html body header font-size 4vw,
+html body footer font-size 4vw,
+html body header +above(2),
+html body footer +above(2) {
+  font-size: 3vw;
 }
 @media only screen and (min-width: 900px) {
-  html body main *,
-  html body header *,
-  html body footer * {
+  html body header,
+  html body footer {
     font-size: 2vw;
   }
 }
@@ -36,6 +36,37 @@ a,
 a:link,
 a:visited {
   color: inherit;
+  transition: all 0.1s ease-in;
+}
+header li a:hover,
+footer li a:hover {
+  text-decoration: none;
+  color: #ccc;
+}
+main a,
+main a:link,
+main a:visited {
+  text-decoration: underline;
+}
+main a:hover {
+  text-decoration: none;
+  color: #ccc;
+}
+main h1 a,
+main h2 a,
+main h3 a,
+main h4 a,
+main h5 a,
+main h1 a:link,
+main h2 a:link,
+main h3 a:link,
+main h4 a:link,
+main h5 a:link,
+main h1 a:visited,
+main h2 a:visited,
+main h3 a:visited,
+main h4 a:visited,
+main h5 a:visited {
   text-decoration: none;
 }
 .tabs a,
@@ -45,6 +76,7 @@ a:visited {
   font-size: 2.7vw;
   border-bottom: 0.75px solid rgba(255,255,255,0);
   transition: border-color 0.2s ease-in;
+  text-decoration: none;
 }
 @media only screen and (min-width: 600px) {
   .tabs a,
@@ -312,14 +344,6 @@ li a {
 li a:hover {
   text-decoration: underline;
 }
-body .button,
-body button,
-body input[type='button'],
-body input[type='reset'],
-body input[type='submit'] {
-  background-color: rgba(255,0,0,0.5);
-  border: unset;
-}
 main {
   padding: 15px 15px 0 15px;
 }
@@ -338,6 +362,34 @@ main > * > * {
 .dropdown-menu nav > ul > li {
   padding-bottom: 3px;
   display: block;
+}
+.message-list {
+  position: relative;
+}
+.message-list .message-type {
+  font-size: 75%;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.message-list .message-type ul,
+.message-list .message-type ul li:last-child {
+  margin: 0;
+}
+.message-list .message-type__status {
+  background-color: rgba(214,216,208,0.7);
+  color: COLOR_GREY_DARK;
+}
+.message-list .message-type__error {
+  background-color: rgba(255,0,0,0.7);
+  color: #eee;
+}
+.message-list .message-type .placeholder * {
+  text-decoration: underline;
+}
+.message-list .backtrace {
+  color: #333;
+  padding: 10px;
 }
 header img,
 footer img {
@@ -415,6 +467,9 @@ header .dropdown-menu {
 .tabs [id^="tab"]:checked ~ [id^="tab-content"] {
   display: block;
 }
+form > * {
+  margin-bottom: 20px;
+}
 form .description {
   font-size: 75%;
 }
@@ -431,298 +486,46 @@ form .form-item.js-form-type-checkbox label {
   margin: 0;
   vertical-align: middle;
 }
-.node-workout-form .field--name-title label {
-  display: none;
+form input[disabled] {
+  opacity: 0.3;
 }
-.node-workout-form .tabledrag-toggle-weight-wrapper {
-  display: none;
+form input.error {
+  opacity: 1 !important;
+  border: 2px solid #f00;
 }
-.node-workout-form .field--name-field-display-settings {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 20px;
-  clear: both;
-}
-.node-workout-form .field--name-field-action-sets .paragraph-type-title {
-  display: none;
-}
-.node-workout-form .field--name-field-action-sets .field-multiple-table thead th {
-  padding: 10px;
-}
-.node-workout-form .field--name-field-action-sets .field-multiple-table tbody tr.draggable {
-  border: 1px solid #ccc;
-}
-.node-workout-form .field--name-field-action-sets .field-multiple-table tbody tr.draggable td.field-multiple-drag a.tabledrag-handle .handle {
-  margin-left: 0;
-}
-.node-workout-form .field--name-field-action-sets .field-multiple-table tbody tr.draggable td:nth-child(2) {
-  padding: 10px;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power {
-  width: calc(99.9% * 1/2 - (30px - 30px * 1/2));
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power:last-child {
-  margin-right: 0;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise:nth-child(2n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions:nth-child(2n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets:nth-child(2n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight:nth-child(2n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration:nth-child(2n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance:nth-child(2n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power:nth-child(2n) {
-  margin-right: 0;
-  float: right;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise:nth-child(2n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions:nth-child(2n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets:nth-child(2n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight:nth-child(2n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration:nth-child(2n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance:nth-child(2n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power:nth-child(2n + 1) {
-  clear: both;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise label,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions label,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets label,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight label,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration label,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance label,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power label {
-  font-size: 75%;
-  width: calc(99.9% * 1/3 - (30px - 30px * 1/3));
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise label:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions label:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets label:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight label:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration label:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance label:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power label:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise label:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions label:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets label:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight label:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration label:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance label:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power label:last-child {
-  margin-right: 0;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise label:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions label:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets label:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight label:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration label:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance label:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power label:nth-child(3n) {
-  margin-right: 0;
-  float: right;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise label:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions label:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets label:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight label:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration label:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance label:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power label:nth-child(3n + 1) {
-  clear: both;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise input,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions input,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets input,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration input,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power input {
-  width: calc(99.9% * 2/3 - (30px - 30px * 2/3));
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise input:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions input:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets input:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration input:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power input:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise input:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions input:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets input:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration input:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power input:last-child {
-  margin-right: 0;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise input:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions input:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets input:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration input:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power input:nth-child(3n) {
-  margin-right: 0;
-  float: right;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise input:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions input:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets input:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration input:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power input:nth-child(3n + 1) {
-  clear: both;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise .field-suffix,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions .field-suffix,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets .field-suffix,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .field-suffix,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration .field-suffix,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .field-suffix,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power .field-suffix {
-  width: calc(99.9% * 1/3 - (30px - 30px * 1/3));
-  font-size: 50%;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise .field-suffix:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions .field-suffix:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets .field-suffix:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .field-suffix:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration .field-suffix:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .field-suffix:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power .field-suffix:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise .field-suffix:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions .field-suffix:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets .field-suffix:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .field-suffix:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration .field-suffix:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .field-suffix:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power .field-suffix:last-child {
-  margin-right: 0;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise .field-suffix:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions .field-suffix:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets .field-suffix:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .field-suffix:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration .field-suffix:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .field-suffix:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power .field-suffix:nth-child(3n) {
-  margin-right: 0;
-  float: right;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-exercise .field-suffix:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-repititions .field-suffix:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-sets .field-suffix:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .field-suffix:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration .field-suffix:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .field-suffix:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power .field-suffix:nth-child(3n + 1) {
-  clear: both;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .js-form-type-select,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .js-form-type-select {
-  width: calc(99.9% * 1/3 - (30px - 30px * 1/3));
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .js-form-type-select:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .js-form-type-select:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .js-form-type-select:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .js-form-type-select:last-child {
-  margin-right: 0;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .js-form-type-select:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .js-form-type-select:nth-child(3n) {
-  margin-right: 0;
-  float: right;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .js-form-type-select:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .js-form-type-select:nth-child(3n + 1) {
-  clear: both;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight input,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance input {
-  margin-right: 30px !important;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-weight .js-form-type-select *,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-distance .js-form-type-select * {
-  font-size: 75%;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration input,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power input {
-  width: calc(99.9% * 1/3 - (30px - 30px * 1/3));
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration input:nth-child(1n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power input:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration input:last-child,
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power input:last-child {
-  margin-right: 0;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration input:nth-child(3n),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power input:nth-child(3n) {
-  margin-right: 0;
-  float: right;
-}
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-duration input:nth-child(3n + 1),
-.node-workout-form .field--name-field-action-sets .paragraphs-subform.form-wrapper .field--name-field-power input:nth-child(3n + 1) {
-  clear: both;
-}
-.node-workout-form .field--name-field-display-settings .paragraphs-subform > * {
+.tabledrag-changed {
+  text-decoration: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
   display: inline-block;
-  padding-right: 5px;
+  color: #f00;
 }
-.node-workout-form .paragraph-type-top .paragraph-type-title {
-  text-overflow: unset;
-  overflow: unset;
+a.tabledrag-handle {
+  height: inherit !important;
+}
+a.tabledrag-handle~.tabledrag-changed {
+  padding-left: 10px;
+}
+a.tabledrag-handle .handle {
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+.plupload-element .plupload_filelist_header,
+.plupload-element .plupload_filelist_footer {
+  height: inherit;
+  position: relative;
+}
+.plupload-element .plupload_filelist_header *,
+.plupload-element .plupload_filelist_footer * {
+  font-size: 75%;
+}
+.plupload-element .plupload_filelist_header > *,
+.plupload-element .plupload_filelist_footer > * {
+  padding: 3px;
+  top: 50%;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf8;base64,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QWlCO0VBQWpCLGFBQWlCO0NBQ2xCO0FBUkQ7Ozs7Ozs7RUFPRSxZQUFpQjtDQUNsQjtBQUNEOzs7Ozs7O0VBT0UsK0NBQWlCO0VBQ2pCLGVBQWU7Q0FDaEI7QUFURDs7Ozs7OztFQU9FLFlBQWlCO0VBQWpCLG1CQUFpQjtFQUFqQixZQUFpQjtDQUVsQjtBQVREOzs7Ozs7O0VBT0UsZ0JBQWlCO0NBRWxCO0FBVEQ7Ozs7Ozs7RUFPRSxnQkFBaUI7RUFBakIsYUFBaUI7Q0FFbEI7QUFURDs7Ozs7OztFQU9FLFlBQWlCO0NBRWxCO0FBQ0Q7Ozs7RUFJRSwrQ0FBaUI7Q0FDbEI7QUFMRDs7OztFQUlFLFlBQWlCO0VBQWpCLG1CQUFpQjtFQUFqQixZQUFpQjtDQUNsQjtBQUxEOzs7O0VBSUUsZ0JBQWlCO0NBQ2xCO0FBTEQ7Ozs7RUFJRSxnQkFBaUI7RUFBakIsYUFBaUI7Q0FDbEI7QUFMRDs7OztFQUlFLFlBQWlCO0NBQ2xCO0FBQ0Q7O0VBRUUsOEJBQThCO0NBQy9CO0FBQ0Q7O0VBRUUsZUFBZTtDQUNoQjtBQUNEOztFQUVFLCtDQUFpQjtDQUNsQjtBQUhEOztFQUVFLFlBQWlCO0VBQWpCLG1CQUFpQjtFQUFqQixZQUFpQjtDQUNsQjtBQUhEOztFQUVFLGdCQUFpQjtDQUNsQjtBQUhEOztFQUVFLGdCQUFpQjtFQUFqQixhQUFpQjtDQUNsQjtBQUhEOztFQUVFLFlBQWlCO0NBQ2xCO0FBQ0Q7RUFDRSxzQkFBc0I7RUFDdEIsbUJBQW1CO0NBQ3BCO0FBQ0Q7RUFDRSxxQkFBcUI7RUFDckIsZ0JBQWdCO0NBQ2pCIiwiZmlsZSI6ImluZGV4LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jbGVhciB7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LDI1NSwyNTUsMCkgIWltcG9ydGFudDtcbn1cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ01vbnRzZXJyYXQnO1xufVxuaHRtbCBib2R5IG1haW4gKixcbmh0bWwgYm9keSBoZWFkZXIgKixcbmh0bWwgYm9keSBmb290ZXIgKiB7XG4gIGZvbnQtZmFtaWx5OiAnTW9udHNlcnJhdCc7XG4gIGZvbnQtd2VpZ2h0OiA0MDA7XG4gIGZvbnQtc2l6ZTogNHZ3O1xufVxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA2MDBweCkge1xuICBodG1sIGJvZHkgbWFpbiAqLFxuICBodG1sIGJvZHkgaGVhZGVyICosXG4gIGh0bWwgYm9keSBmb290ZXIgKiB7XG4gICAgZm9udC1zaXplOiAzdnc7XG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTAwcHgpIHtcbiAgaHRtbCBib2R5IG1haW4gKixcbiAgaHRtbCBib2R5IGhlYWRlciAqLFxuICBodG1sIGJvZHkgZm9vdGVyICoge1xuICAgIGZvbnQtc2l6ZTogMnZ3O1xuICB9XG59XG5odG1sIGJvZHkgaGVhZGVyICosXG5odG1sIGJvZHkgZm9vdGVyICoge1xuICBmb250LXdlaWdodDogNTAwO1xufVxuYm9keSBwIHtcbiAgbWFyZ2luOiAxZW0gMDtcbn1cbmEsXG5hOmxpbmssXG5hOnZpc2l0ZWQge1xuICBjb2xvcjogaW5oZXJpdDtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xufVxuLnRhYnMgYSxcbi50YWJzIGE6bGluayxcbi50YWJzIGE6dmlzaXRlZCB7XG4gIGNvbG9yOiAjZmZmO1xuICBmb250LXNpemU6IDIuN3Z3O1xuICBib3JkZXItYm90dG9tOiAwLjc1cHggc29saWQgcmdiYSgyNTUsMjU1LDI1NSwwKTtcbiAgdHJhbnNpdGlvbjogYm9yZGVyLWNvbG9yIDAuMnMgZWFzZS1pbjtcbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNjAwcHgpIHtcbiAgLnRhYnMgYSxcbiAgLnRhYnMgYTpsaW5rLFxuICAudGFicyBhOnZpc2l0ZWQge1xuICAgIGZvbnQtc2l6ZTogMS43dnc7XG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTAwcHgpIHtcbiAgLnRhYnMgYSxcbiAgLnRhYnMgYTpsaW5rLFxuICAudGFicyBhOnZpc2l0ZWQge1xuICAgIGZvbnQtc2l6ZTogMS4xdnc7XG4gIH1cbn1cbi50YWJzIGE6aG92ZXIge1xuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gIGJvcmRlci1ib3R0b206IDAuNzVweCBzb2xpZCAjZmZmO1xufVxuYS5pcy1hY3RpdmUge1xuICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTtcbn1cbmh0bWwsXG5ib2R5LFxuZGl2LFxuc3BhbixcbmFwcGxldCxcbm9iamVjdCxcbmlmcmFtZSxcbmgxLFxuaDIsXG5oMyxcbmg0LFxuaDUsXG5oNixcbnAsXG5ibG9ja3F1b3RlLFxucHJlLFxuYSxcbmFiYnIsXG5hY3JvbnltLFxuYWRkcmVzcyxcbmJpZyxcbmNpdGUsXG5jb2RlLFxuZGVsLFxuZGZuLFxuZW0sXG5pbWcsXG5pbnMsXG5rYmQsXG5xLFxucyxcbnNhbXAsXG5zbWFsbCxcbnN0cmlrZSxcbnN0cm9uZyxcbnN1YixcbnN1cCxcbnR0LFxudmFyLFxuYixcbnUsXG5pLFxuY2VudGVyLFxuZGwsXG5kdCxcbmRkLFxub2wsXG51bCxcbmxpLFxuZmllbGRzZXQsXG5mb3JtLFxubGFiZWwsXG5sZWdlbmQsXG50YWJsZSxcbmNhcHRpb24sXG50Ym9keSxcbnRmb290LFxudGhlYWQsXG50cixcbnRoLFxudGQsXG5hcnRpY2xlLFxuYXNpZGUsXG5jYW52YXMsXG5kZXRhaWxzLFxuZW1iZWQsXG5maWd1cmUsXG5maWdjYXB0aW9uLFxuZm9vdGVyLFxuaGVhZGVyLFxuaGdyb3VwLFxubWVudSxcbm5hdixcbm91dHB1dCxcbnJ1YnksXG5zZWN0aW9uLFxuc3VtbWFyeSxcbnRpbWUsXG5tYXJrLFxuYXVkaW8sXG52aWRlbyB7XG4gIG1hcmdpbjogMDtcbiAgcGFkZGluZzogMDtcbiAgYm9yZGVyOiAwO1xuICBmb250LXNpemU6IDEwMCU7XG4gIGZvbnQ6IGluaGVyaXQ7XG4gIHZlcnRpY2FsLWFsaWduOiBiYXNlbGluZTtcbn1cbmFydGljbGUsXG5hc2lkZSxcbmRldGFpbHMsXG5maWdjYXB0aW9uLFxuZmlndXJlLFxuZm9vdGVyLFxuaGVhZGVyLFxuaGdyb3VwLFxubWVudSxcbm5hdixcbnNlY3Rpb24ge1xuICBkaXNwbGF5OiBibG9jaztcbn1cbmJvZHkge1xuICBsaW5lLWhlaWdodDogMTtcbn1cbm9sLFxudWwge1xuICBsaXN0LXN0eWxlOiBub25lO1xufVxuYmxvY2txdW90ZSxcbnEge1xuICBxdW90ZXM6IG5vbmU7XG59XG5ibG9ja3F1b3RlOmJlZm9yZSxcbmJsb2NrcXVvdGU6YWZ0ZXIsXG5xOmJlZm9yZSxcbnE6YWZ0ZXIge1xuICBjb250ZW50OiAnJztcbiAgY29udGVudDogbm9uZTtcbn1cbnRhYmxlIHtcbiAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcbiAgYm9yZGVyLXNwYWNpbmc6IDA7XG59XG4qIHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTAwcHgpIHtcbiAgYm9keSB7XG4gICAgbWFyZ2luLXRvcDogMTAwcHg7XG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTAwcHgpIHtcbiAgLmxheW91dC1jb250YWluZXIge1xuICAgIGxvc3QtY29sdW1uOiAyLzM7XG4gICAgbG9zdC1vZmZzZXQ6IDEvNjtcbiAgfVxufVxuLmxheW91dC1jb250YWluZXIgPiAqIHtcbiAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcbiAgYm9yZGVyLWJvdHRvbTogMDtcbn1cbi5sYXlvdXQtY29udGFpbmVyID4gKjpsYXN0LWNoaWxkIHtcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNjY2M7XG59XG4uYnVyZ2VyIHtcbiAgd2lkdGg6IDIycHg7XG4gIGRpc3BsYXk6IGJsb2NrICFpbXBvcnRhbnQ7XG4gIGJvcmRlcjogMDtcbiAgYmFja2dyb3VuZDogbm9uZTtcbiAgb3V0bGluZTogMDtcbiAgcGFkZGluZzogMDtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBib3JkZXItYm90dG9tOiAzcHggc29saWQgY3VycmVudENvbG9yO1xuICB0cmFuc2l0aW9uOiBib3JkZXItYm90dG9tIDAuMnMgZWFzZS1pbi1vdXQ7XG4gIC13ZWJraXQtdHJhbnNpdGlvbjogYm9yZGVyLWJvdHRvbSAwLjJzIGVhc2UtaW4tb3V0O1xufVxuLmJ1cmdlcjo6LW1vei1mb2N1cy1pbm5lciB7XG4gIGJvcmRlcjogMDtcbiAgcGFkZGluZzogMDtcbn1cbi5idXJnZXI6YmVmb3JlIHtcbiAgY29udGVudDogXCJcIjtcbiAgZGlzcGxheTogYmxvY2s7XG4gIGJvcmRlci1ib3R0b206IDNweCBzb2xpZCBjdXJyZW50Q29sb3I7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW4tYm90dG9tOiA1cHg7XG4gIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjJzIGVhc2UtaW4tb3V0O1xufVxuLmJ1cmdlcjphZnRlciB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBib3JkZXItYm90dG9tOiAzcHggc29saWQgY3VycmVudENvbG9yO1xuICB3aWR0aDogMTAwJTtcbiAgbWFyZ2luLWJvdHRvbTogNXB4O1xuICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4ycyBlYXNlLWluLW91dDtcbn1cbi5idXJnZXItY2hlY2s6Y2hlY2tlZCB+IC5idXJnZXIge1xuICBib3JkZXItYm90dG9tOiAzcHggc29saWQgdHJhbnNwYXJlbnQ7XG4gIHRyYW5zaXRpb246IGJvcmRlci1ib3R0b20gMC4ycyBlYXNlLWluLW91dDtcbn1cbi5idXJnZXItY2hlY2s6Y2hlY2tlZCB+IC5idXJnZXI6YmVmb3JlIHtcbiAgdHJhbnNmb3JtOiByb3RhdGUoLTQ1ZGVnKSB0cmFuc2xhdGVZKDNweCkgdHJhbnNsYXRlWCgtNXB4KTtcbiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMnMgZWFzZS1pbi1vdXQ7XG59XG4uYnVyZ2VyLWNoZWNrOmNoZWNrZWQgfiAuYnVyZ2VyOmFmdGVyIHtcbiAgdHJhbnNmb3JtOiByb3RhdGUoNDVkZWcpIHRyYW5zbGF0ZVkoLTFweCkgdHJhbnNsYXRlWCgtM3B4KTtcbiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMnMgZWFzZS1pbi1vdXQ7XG59XG4uZHJvcGRvd24tdGFyZ2V0IHtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgbWF4LWhlaWdodDogMDtcbiAgdmlzaWJpbGl0eTogaGlkZGVuO1xuICB0cmFuc2l0aW9uOiBtYXgtaGVpZ2h0IDFzIGVhc2Utb3V0O1xufVxuLmJ1cmdlci1jaGVjayB7XG4gIGRpc3BsYXk6IG5vbmUgIWltcG9ydGFudDtcbn1cbi5idXJnZXItY2hlY2s6Y2hlY2tlZCB+IC5kcm9wZG93bi10YXJnZXQge1xuICBtYXgtaGVpZ2h0OiA1MDBweDtcbiAgdmlzaWJpbGl0eTogaW5oZXJpdDtcbiAgdHJhbnNpdGlvbjogbWF4LWhlaWdodCAxcyBlYXNlLW91dDtcbn1cbnNtYWxsIHtcbiAgZm9udC1zaXplOiAxNHB4O1xufVxudWwge1xuICBtYXJnaW46IDA7XG4gIHBhZGRpbmc6IDA7XG59XG5saSB7XG4gIGxpc3Qtc3R5bGU6IG5vbmU7XG4gIGZvbnQtc2l6ZTogMjVweDtcbiAgcGFkZGluZzogNXB4IDA7XG59XG5saSBhIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xufVxubGkgYTpob3ZlciB7XG4gIHRleHQtZGVjb3JhdGlvbjogdW5kZXJsaW5lO1xufVxuYm9keSAuYnV0dG9uLFxuYm9keSBidXR0b24sXG5ib2R5IGlucHV0W3R5cGU9J2J1dHRvbiddLFxuYm9keSBpbnB1dFt0eXBlPSdyZXNldCddLFxuYm9keSBpbnB1dFt0eXBlPSdzdWJtaXQnXSB7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LDAsMCwwLjUpO1xuICBib3JkZXI6IHVuc2V0O1xufVxubWFpbiB7XG4gIHBhZGRpbmc6IDE1cHggMTVweCAwIDE1cHg7XG59XG5tYWluID4gKiA+ICoge1xuICBwYWRkaW5nLWJvdHRvbTogMTVweDtcbn1cbi5kcm9wZG93bi1tZW51IGxhYmVsIHtcbiAgZmxvYXQ6IHJpZ2h0O1xufVxuLmRyb3Bkb3duLW1lbnUgbmF2IHtcbiAgbWFyZ2luLXRvcDogMjVweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjtcbiAgcGFkZGluZzogNXB4O1xuICBib3JkZXI6IDFweCBzb2xpZCAjZGRkO1xufVxuLmRyb3Bkb3duLW1lbnUgbmF2ID4gdWwgPiBsaSB7XG4gIHBhZGRpbmctYm90dG9tOiAzcHg7XG4gIGRpc3BsYXk6IGJsb2NrO1xufVxuaGVhZGVyIGltZyxcbmZvb3RlciBpbWcge1xuICBoZWlnaHQ6IDM1cHg7XG4gIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG59XG5oZWFkZXIgLnJlZ2lvbixcbmZvb3RlciAucmVnaW9uIHtcbiAgaGVpZ2h0OiA1MHB4O1xuICBkaXNwbGF5OiB0YWJsZTtcbn1cbmhlYWRlciAucmVnaW9uID4gKixcbmZvb3RlciAucmVnaW9uID4gKiB7XG4gIGRpc3BsYXk6IHRhYmxlLWNlbGw7XG4gIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gIHBhZGRpbmc6IDAgNXB4O1xufVxuaGVhZGVyIC5yZWdpb24gPiAqID4gKixcbmZvb3RlciAucmVnaW9uID4gKiA+ICoge1xuICBkaXNwbGF5OiB0YWJsZS1jZWxsO1xuICB2ZXJ0aWNhbC1hbGlnbjogdG9wO1xufVxubmF2IHVsIGxpIHtcbiAgZGlzcGxheTogdGFibGUtY2VsbDtcbiAgcGFkZGluZzogMCA1cHg7XG59XG4uZHJvcGRvd24tdGFyZ2V0IHtcbiAgZGlzcGxheTogYmxvY2sgIWltcG9ydGFudDtcbn1cbmhlYWRlciB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbmhlYWRlciAuZHJvcGRvd24tbWVudSB7XG4gIHJpZ2h0OiAzcHg7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgbWFyZ2luLXRvcDogMTVweDtcbn1cbi50YWJzIHtcbiAgbGlzdC1zdHlsZTogbm9uZTtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgZGlzcGxheTogYmxvY2s7XG4gIGJveC1zaXppbmc6IGNvbnRlbnQtYm94O1xuICBib3JkZXItYm90dG9tOiAxcHggc29saWQgI2NjYztcbn1cbi50YWJzICoge1xuICBjb2xvcjogI2ZmZjtcbiAgZm9udC1zaXplOiAwLjlyZW07XG59XG4udGFicyBsaSB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgbWFyZ2luOiAwICFpbXBvcnRhbnQ7XG4gIHBhZGRpbmc6IDAgIWltcG9ydGFudDtcbn1cbi50YWJzIGlucHV0W3R5cGU9XCJyYWRpb1wiXSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICBsZWZ0OiAtOTk5OXB4O1xufVxuLnRhYnMgbGFiZWwge1xuICBkaXNwbGF5OiBibG9jaztcbiAgcGFkZGluZzogNHB4IDExcHg7XG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XG4gIGJhY2tncm91bmQ6ICNjY2M7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuQGluY2x1ZGUgdHJhbnNpdGlvbihhbGwgMC4ycyBlYXNlLWluLW91dCk7XG4udGFicyBsYWJlbDpob3ZlciB7XG4gIGJhY2tncm91bmQ6ICNiM2IzYjM7XG59XG4udGFicyBbaWRePVwidGFiXCJdOmNoZWNrZWQgKyBsYWJlbCB7XG4gIHRvcDogMDtcbiAgYmFja2dyb3VuZDogI2E2YTZhNjtcbn1cbi50YWJzIFtpZF49XCJ0YWJcIl06Y2hlY2tlZCB+IFtpZF49XCJ0YWItY29udGVudFwiXSB7XG4gIGRpc3BsYXk6IGJsb2NrO1xufVxuZm9ybSAuZGVzY3JpcHRpb24ge1xuICBmb250LXNpemU6IDc1JTtcbn1cbmZvcm0gLmZvcm0taXRlbS5qcy1mb3JtLXR5cGUtY2hlY2tib3gge1xuICBkaXNwbGF5OiB0YWJsZTtcbn1cbmZvcm0gLmZvcm0taXRlbS5qcy1mb3JtLXR5cGUtY2hlY2tib3ggbGFiZWwge1xuICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG4gIGZvbnQtc2l6ZTogNzUlO1xufVxuZm9ybSAuZm9ybS1pdGVtLmpzLWZvcm0tdHlwZS1jaGVja2JveCBpbnB1dCxcbmZvcm0gLmZvcm0taXRlbS5qcy1mb3JtLXR5cGUtY2hlY2tib3ggbGFiZWwge1xuICBkaXNwbGF5OiB0YWJsZS1jZWxsO1xuICBtYXJnaW46IDA7XG4gIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG59XG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLXRpdGxlIGxhYmVsIHtcbiAgZGlzcGxheTogbm9uZTtcbn1cbi5ub2RlLXdvcmtvdXQtZm9ybSAudGFibGVkcmFnLXRvZ2dsZS13ZWlnaHQtd3JhcHBlciB7XG4gIGRpc3BsYXk6IG5vbmU7XG59XG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWRpc3BsYXktc2V0dGluZ3Mge1xuICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICBwYWRkaW5nOiAxMHB4O1xuICBtYXJnaW4tYm90dG9tOiAyMHB4O1xuICBjbGVhcjogYm90aDtcbn1cbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaC10eXBlLXRpdGxlIHtcbiAgZGlzcGxheTogbm9uZTtcbn1cbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLmZpZWxkLW11bHRpcGxlLXRhYmxlIHRoZWFkIHRoIHtcbiAgcGFkZGluZzogMTBweDtcbn1cbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLmZpZWxkLW11bHRpcGxlLXRhYmxlIHRib2R5IHRyLmRyYWdnYWJsZSB7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XG59XG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5maWVsZC1tdWx0aXBsZS10YWJsZSB0Ym9keSB0ci5kcmFnZ2FibGUgdGQuZmllbGQtbXVsdGlwbGUtZHJhZyBhLnRhYmxlZHJhZy1oYW5kbGUgLmhhbmRsZSB7XG4gIG1hcmdpbi1sZWZ0OiAwO1xufVxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAuZmllbGQtbXVsdGlwbGUtdGFibGUgdGJvZHkgdHIuZHJhZ2dhYmxlIHRkOm50aC1jaGlsZCgyKSB7XG4gIHBhZGRpbmc6IDEwcHg7XG59XG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1leGVyY2lzZSxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLXJlcGl0aXRpb25zLFxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtc2V0cyxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLXdlaWdodCxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLWR1cmF0aW9uLFxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtZGlzdGFuY2UsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1wb3dlciB7XG4gIGxvc3QtY29sdW1uOiAxLzI7XG59XG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1leGVyY2lzZSBsYWJlbCxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLXJlcGl0aXRpb25zIGxhYmVsLFxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtc2V0cyBsYWJlbCxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLXdlaWdodCBsYWJlbCxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLWR1cmF0aW9uIGxhYmVsLFxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtZGlzdGFuY2UgbGFiZWwsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1wb3dlciBsYWJlbCB7XG4gIGZvbnQtc2l6ZTogNzUlO1xuICBsb3N0LWNvbHVtbjogMS8zO1xufVxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtZXhlcmNpc2UgaW5wdXQsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1yZXBpdGl0aW9ucyBpbnB1dCxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLXNldHMgaW5wdXQsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC13ZWlnaHQgaW5wdXQsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1kdXJhdGlvbiBpbnB1dCxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLWRpc3RhbmNlIGlucHV0LFxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtcG93ZXIgaW5wdXQge1xuICBsb3N0LWNvbHVtbjogMi8zO1xufVxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtZXhlcmNpc2UgLmZpZWxkLXN1ZmZpeCxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLXJlcGl0aXRpb25zIC5maWVsZC1zdWZmaXgsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1zZXRzIC5maWVsZC1zdWZmaXgsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC13ZWlnaHQgLmZpZWxkLXN1ZmZpeCxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLWR1cmF0aW9uIC5maWVsZC1zdWZmaXgsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1kaXN0YW5jZSAuZmllbGQtc3VmZml4LFxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtcG93ZXIgLmZpZWxkLXN1ZmZpeCB7XG4gIGxvc3QtY29sdW1uOiAxLzM7XG4gIGZvbnQtc2l6ZTogNTAlO1xufVxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtd2VpZ2h0IGlucHV0LFxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtZGlzdGFuY2UgaW5wdXQsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC13ZWlnaHQgLmpzLWZvcm0tdHlwZS1zZWxlY3QsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1kaXN0YW5jZSAuanMtZm9ybS10eXBlLXNlbGVjdCB7XG4gIGxvc3QtY29sdW1uOiAxLzM7XG59XG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC13ZWlnaHQgaW5wdXQsXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1kaXN0YW5jZSBpbnB1dCB7XG4gIG1hcmdpbi1yaWdodDogMzBweCAhaW1wb3J0YW50O1xufVxuLm5vZGUtd29ya291dC1mb3JtIC5maWVsZC0tbmFtZS1maWVsZC1hY3Rpb24tc2V0cyAucGFyYWdyYXBocy1zdWJmb3JtLmZvcm0td3JhcHBlciAuZmllbGQtLW5hbWUtZmllbGQtd2VpZ2h0IC5qcy1mb3JtLXR5cGUtc2VsZWN0ICosXG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1kaXN0YW5jZSAuanMtZm9ybS10eXBlLXNlbGVjdCAqIHtcbiAgZm9udC1zaXplOiA3NSU7XG59XG4ubm9kZS13b3Jrb3V0LWZvcm0gLmZpZWxkLS1uYW1lLWZpZWxkLWFjdGlvbi1zZXRzIC5wYXJhZ3JhcGhzLXN1YmZvcm0uZm9ybS13cmFwcGVyIC5maWVsZC0tbmFtZS1maWVsZC1kdXJhdGlvbiBpbnB1dCxcbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtYWN0aW9uLXNldHMgLnBhcmFncmFwaHMtc3ViZm9ybS5mb3JtLXdyYXBwZXIgLmZpZWxkLS1uYW1lLWZpZWxkLXBvd2VyIGlucHV0IHtcbiAgbG9zdC1jb2x1bW46IDEvMztcbn1cbi5ub2RlLXdvcmtvdXQtZm9ybSAuZmllbGQtLW5hbWUtZmllbGQtZGlzcGxheS1zZXR0aW5ncyAucGFyYWdyYXBocy1zdWJmb3JtID4gKiB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgcGFkZGluZy1yaWdodDogNXB4O1xufVxuLm5vZGUtd29ya291dC1mb3JtIC5wYXJhZ3JhcGgtdHlwZS10b3AgLnBhcmFncmFwaC10eXBlLXRpdGxlIHtcbiAgdGV4dC1vdmVyZmxvdzogdW5zZXQ7XG4gIG92ZXJmbG93OiB1bnNldDtcbn1cbiJdfQ== */
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,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bmQtY29sb3I6IHJnYmEoMjU1LDI1NSwyNTUsMCkgIWltcG9ydGFudDtcbn1cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ01vbnRzZXJyYXQnO1xufVxuaHRtbCBib2R5IG1haW4gKixcbmh0bWwgYm9keSBoZWFkZXIgKixcbmh0bWwgYm9keSBmb290ZXIgKiB7XG4gIGZvbnQtZmFtaWx5OiAnSGVsdmV0aWNhJztcbn1cbmh0bWwgYm9keSBoZWFkZXIgKixcbmh0bWwgYm9keSBmb290ZXIgKixcbmh0bWwgYm9keSBoZWFkZXIgZm9udC13ZWlnaHQ6IDQwMCxcbmh0bWwgYm9keSBmb290ZXIgZm9udC13ZWlnaHQ6IDQwMCxcbmh0bWwgYm9keSBoZWFkZXIgZm9udC1zaXplIDR2dyxcbmh0bWwgYm9keSBmb290ZXIgZm9udC1zaXplIDR2dyxcbmh0bWwgYm9keSBoZWFkZXIgK2Fib3ZlKDIpLFxuaHRtbCBib2R5IGZvb3RlciArYWJvdmUoMikge1xuICBmb250LXNpemU6IDN2dztcbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTAwcHgpIHtcbiAgaHRtbCBib2R5IGhlYWRlcixcbiAgaHRtbCBib2R5IGZvb3RlciB7XG4gICAgZm9udC1zaXplOiAydnc7XG4gIH1cbn1cbmh0bWwgYm9keSBoZWFkZXIgKixcbmh0bWwgYm9keSBmb290ZXIgKiB7XG4gIGZvbnQtd2VpZ2h0OiA1MDA7XG59XG5ib2R5IHAge1xuICBtYXJnaW46IDFlbSAwO1xufVxuYSxcbmE6bGluayxcbmE6dmlzaXRlZCB7XG4gIGNvbG9yOiBpbmhlcml0O1xuICB0cmFuc2l0aW9uOiBhbGwgMC4xcyBlYXNlLWluO1xufVxuaGVhZGVyIGxpIGE6aG92ZXIsXG5mb290ZXIgbGkgYTpob3ZlciB7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgY29sb3I6ICNjY2M7XG59XG5tYWluIGEsXG5tYWluIGE6bGluayxcbm1haW4gYTp2aXNpdGVkIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmU7XG59XG5tYWluIGE6aG92ZXIge1xuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gIGNvbG9yOiAjY2NjO1xufVxubWFpbiBoMSBhLFxubWFpbiBoMiBhLFxubWFpbiBoMyBhLFxubWFpbiBoNCBhLFxubWFpbiBoNSBhLFxubWFpbiBoMSBhOmxpbmssXG5tYWluIGgyIGE6bGluayxcbm1haW4gaDMgYTpsaW5rLFxubWFpbiBoNCBhOmxpbmssXG5tYWluIGg1IGE6bGluayxcbm1haW4gaDEgYTp2aXNpdGVkLFxubWFpbiBoMiBhOnZpc2l0ZWQsXG5tYWluIGgzIGE6dmlzaXRlZCxcbm1haW4gaDQgYTp2aXNpdGVkLFxubWFpbiBoNSBhOnZpc2l0ZWQge1xuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG59XG4udGFicyBhLFxuLnRhYnMgYTpsaW5rLFxuLnRhYnMgYTp2aXNpdGVkIHtcbiAgY29sb3I6ICNmZmY7XG4gIGZvbnQtc2l6ZTogMi43dnc7XG4gIGJvcmRlci1ib3R0b206IDAuNzVweCBzb2xpZCByZ2JhKDI1NSwyNTUsMjU1LDApO1xuICB0cmFuc2l0aW9uOiBib3JkZXItY29sb3IgMC4ycyBlYXNlLWluO1xuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDYwMHB4KSB7XG4gIC50YWJzIGEsXG4gIC50YWJzIGE6bGluayxcbiAgLnRhYnMgYTp2aXNpdGVkIHtcbiAgICBmb250LXNpemU6IDEuN3Z3O1xuICB9XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDkwMHB4KSB7XG4gIC50YWJzIGEsXG4gIC50YWJzIGE6bGluayxcbiAgLnRhYnMgYTp2aXNpdGVkIHtcbiAgICBmb250LXNpemU6IDEuMXZ3O1xuICB9XG59XG4udGFicyBhOmhvdmVyIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICBib3JkZXItYm90dG9tOiAwLjc1cHggc29saWQgI2ZmZjtcbn1cbmEuaXMtYWN0aXZlIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmU7XG59XG5odG1sLFxuYm9keSxcbmRpdixcbnNwYW4sXG5hcHBsZXQsXG5vYmplY3QsXG5pZnJhbWUsXG5oMSxcbmgyLFxuaDMsXG5oNCxcbmg1LFxuaDYsXG5wLFxuYmxvY2txdW90ZSxcbnByZSxcbmEsXG5hYmJyLFxuYWNyb255bSxcbmFkZHJlc3MsXG5iaWcsXG5jaXRlLFxuY29kZSxcbmRlbCxcbmRmbixcbmVtLFxuaW1nLFxuaW5zLFxua2JkLFxucSxcbnMsXG5zYW1wLFxuc21hbGwsXG5zdHJpa2UsXG5zdHJvbmcsXG5zdWIsXG5zdXAsXG50dCxcbnZhcixcbmIsXG51LFxuaSxcbmNlbnRlcixcbmRsLFxuZHQsXG5kZCxcbm9sLFxudWwsXG5saSxcbmZpZWxkc2V0LFxuZm9ybSxcbmxhYmVsLFxubGVnZW5kLFxudGFibGUsXG5jYXB0aW9uLFxudGJvZHksXG50Zm9vdCxcbnRoZWFkLFxudHIsXG50aCxcbnRkLFxuYXJ0aWNsZSxcbmFzaWRlLFxuY2FudmFzLFxuZGV0YWlscyxcbmVtYmVkLFxuZmlndXJlLFxuZmlnY2FwdGlvbixcbmZvb3RlcixcbmhlYWRlcixcbmhncm91cCxcbm1lbnUsXG5uYXYsXG5vdXRwdXQsXG5ydWJ5LFxuc2VjdGlvbixcbnN1bW1hcnksXG50aW1lLFxubWFyayxcbmF1ZGlvLFxudmlkZW8ge1xuICBtYXJnaW46IDA7XG4gIHBhZGRpbmc6IDA7XG4gIGJvcmRlcjogMDtcbiAgZm9udC1zaXplOiAxMDAlO1xuICBmb250OiBpbmhlcml0O1xuICB2ZXJ0aWNhbC1hbGlnbjogYmFzZWxpbmU7XG59XG5hcnRpY2xlLFxuYXNpZGUsXG5kZXRhaWxzLFxuZmlnY2FwdGlvbixcbmZpZ3VyZSxcbmZvb3RlcixcbmhlYWRlcixcbmhncm91cCxcbm1lbnUsXG5uYXYsXG5zZWN0aW9uIHtcbiAgZGlzcGxheTogYmxvY2s7XG59XG5ib2R5IHtcbiAgbGluZS1oZWlnaHQ6IDE7XG59XG5vbCxcbnVsIHtcbiAgbGlzdC1zdHlsZTogbm9uZTtcbn1cbmJsb2NrcXVvdGUsXG5xIHtcbiAgcXVvdGVzOiBub25lO1xufVxuYmxvY2txdW90ZTpiZWZvcmUsXG5ibG9ja3F1b3RlOmFmdGVyLFxucTpiZWZvcmUsXG5xOmFmdGVyIHtcbiAgY29udGVudDogJyc7XG4gIGNvbnRlbnQ6IG5vbmU7XG59XG50YWJsZSB7XG4gIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7XG4gIGJvcmRlci1zcGFjaW5nOiAwO1xufVxuKiB7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDkwMHB4KSB7XG4gIGJvZHkge1xuICAgIG1hcmdpbi10b3A6IDEwMHB4O1xuICB9XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDkwMHB4KSB7XG4gIC5sYXlvdXQtY29udGFpbmVyIHtcbiAgICBsb3N0LWNvbHVtbjogMi8zO1xuICAgIGxvc3Qtb2Zmc2V0OiAxLzY7XG4gIH1cbn1cbi5sYXlvdXQtY29udGFpbmVyID4gKiB7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XG4gIGJvcmRlci1ib3R0b206IDA7XG59XG4ubGF5b3V0LWNvbnRhaW5lciA+ICo6bGFzdC1jaGlsZCB7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjY2NjO1xufVxuLmJ1cmdlciB7XG4gIHdpZHRoOiAyMnB4O1xuICBkaXNwbGF5OiBibG9jayAhaW1wb3J0YW50O1xuICBib3JkZXI6IDA7XG4gIGJhY2tncm91bmQ6IG5vbmU7XG4gIG91dGxpbmU6IDA7XG4gIHBhZGRpbmc6IDA7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgYm9yZGVyLWJvdHRvbTogM3B4IHNvbGlkIGN1cnJlbnRDb2xvcjtcbiAgdHJhbnNpdGlvbjogYm9yZGVyLWJvdHRvbSAwLjJzIGVhc2UtaW4tb3V0O1xuICAtd2Via2l0LXRyYW5zaXRpb246IGJvcmRlci1ib3R0b20gMC4ycyBlYXNlLWluLW91dDtcbn1cbi5idXJnZXI6Oi1tb3otZm9jdXMtaW5uZXIge1xuICBib3JkZXI6IDA7XG4gIHBhZGRpbmc6IDA7XG59XG4uYnVyZ2VyOmJlZm9yZSB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBib3JkZXItYm90dG9tOiAzcHggc29saWQgY3VycmVudENvbG9yO1xuICB3aWR0aDogMTAwJTtcbiAgbWFyZ2luLWJvdHRvbTogNXB4O1xuICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4ycyBlYXNlLWluLW91dDtcbn1cbi5idXJnZXI6YWZ0ZXIge1xuICBjb250ZW50OiBcIlwiO1xuICBkaXNwbGF5OiBibG9jaztcbiAgYm9yZGVyLWJvdHRvbTogM3B4IHNvbGlkIGN1cnJlbnRDb2xvcjtcbiAgd2lkdGg6IDEwMCU7XG4gIG1hcmdpbi1ib3R0b206IDVweDtcbiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMnMgZWFzZS1pbi1vdXQ7XG59XG4uYnVyZ2VyLWNoZWNrOmNoZWNrZWQgfiAuYnVyZ2VyIHtcbiAgYm9yZGVyLWJvdHRvbTogM3B4IHNvbGlkIHRyYW5zcGFyZW50O1xuICB0cmFuc2l0aW9uOiBib3JkZXItYm90dG9tIDAuMnMgZWFzZS1pbi1vdXQ7XG59XG4uYnVyZ2VyLWNoZWNrOmNoZWNrZWQgfiAuYnVyZ2VyOmJlZm9yZSB7XG4gIHRyYW5zZm9ybTogcm90YXRlKC00NWRlZykgdHJhbnNsYXRlWSgzcHgpIHRyYW5zbGF0ZVgoLTVweCk7XG4gIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjJzIGVhc2UtaW4tb3V0O1xufVxuLmJ1cmdlci1jaGVjazpjaGVja2VkIH4gLmJ1cmdlcjphZnRlciB7XG4gIHRyYW5zZm9ybTogcm90YXRlKDQ1ZGVnKSB0cmFuc2xhdGVZKC0xcHgpIHRyYW5zbGF0ZVgoLTNweCk7XG4gIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjJzIGVhc2UtaW4tb3V0O1xufVxuLmRyb3Bkb3duLXRhcmdldCB7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIG1heC1oZWlnaHQ6IDA7XG4gIHZpc2liaWxpdHk6IGhpZGRlbjtcbiAgdHJhbnNpdGlvbjogbWF4LWhlaWdodCAxcyBlYXNlLW91dDtcbn1cbi5idXJnZXItY2hlY2sge1xuICBkaXNwbGF5OiBub25lICFpbXBvcnRhbnQ7XG59XG4uYnVyZ2VyLWNoZWNrOmNoZWNrZWQgfiAuZHJvcGRvd24tdGFyZ2V0IHtcbiAgbWF4LWhlaWdodDogNTAwcHg7XG4gIHZpc2liaWxpdHk6IGluaGVyaXQ7XG4gIHRyYW5zaXRpb246IG1heC1oZWlnaHQgMXMgZWFzZS1vdXQ7XG59XG5zbWFsbCB7XG4gIGZvbnQtc2l6ZTogMTRweDtcbn1cbnVsIHtcbiAgbWFyZ2luOiAwO1xuICBwYWRkaW5nOiAwO1xufVxubGkge1xuICBsaXN0LXN0eWxlOiBub25lO1xuICBmb250LXNpemU6IDI1cHg7XG4gIHBhZGRpbmc6IDVweCAwO1xufVxubGkgYSB7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbn1cbmxpIGE6aG92ZXIge1xuICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTtcbn1cbm1haW4ge1xuICBwYWRkaW5nOiAxNXB4IDE1cHggMCAxNXB4O1xufVxubWFpbiA+ICogPiAqIHtcbiAgcGFkZGluZy1ib3R0b206IDE1cHg7XG59XG4uZHJvcGRvd24tbWVudSBsYWJlbCB7XG4gIGZsb2F0OiByaWdodDtcbn1cbi5kcm9wZG93bi1tZW51IG5hdiB7XG4gIG1hcmdpbi10b3A6IDI1cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmY7XG4gIHBhZGRpbmc6IDVweDtcbiAgYm9yZGVyOiAxcHggc29saWQgI2RkZDtcbn1cbi5kcm9wZG93bi1tZW51IG5hdiA+IHVsID4gbGkge1xuICBwYWRkaW5nLWJvdHRvbTogM3B4O1xuICBkaXNwbGF5OiBibG9jaztcbn1cbi5tZXNzYWdlLWxpc3Qge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG4ubWVzc2FnZS1saXN0IC5tZXNzYWdlLXR5cGUge1xuICBmb250LXNpemU6IDc1JTtcbiAgcGFkZGluZzogMjBweDtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgbWFyZ2luLWJvdHRvbTogMjBweDtcbn1cbi5tZXNzYWdlLWxpc3QgLm1lc3NhZ2UtdHlwZSB1bCxcbi5tZXNzYWdlLWxpc3QgLm1lc3NhZ2UtdHlwZSB1bCBsaTpsYXN0LWNoaWxkIHtcbiAgbWFyZ2luOiAwO1xufVxuLm1lc3NhZ2UtbGlzdCAubWVzc2FnZS10eXBlX19zdGF0dXMge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDIxNCwyMTYsMjA4LDAuNyk7XG4gIGNvbG9yOiBDT0xPUl9HUkVZX0RBUks7XG59XG4ubWVzc2FnZS1saXN0IC5tZXNzYWdlLXR5cGVfX2Vycm9yIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsMCwwLDAuNyk7XG4gIGNvbG9yOiAjZWVlO1xufVxuLm1lc3NhZ2UtbGlzdCAubWVzc2FnZS10eXBlIC5wbGFjZWhvbGRlciAqIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmU7XG59XG4ubWVzc2FnZS1saXN0IC5iYWNrdHJhY2Uge1xuICBjb2xvcjogIzMzMztcbiAgcGFkZGluZzogMTBweDtcbn1cbmhlYWRlciBpbWcsXG5mb290ZXIgaW1nIHtcbiAgaGVpZ2h0OiAzNXB4O1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuaGVhZGVyIC5yZWdpb24sXG5mb290ZXIgLnJlZ2lvbiB7XG4gIGhlaWdodDogNTBweDtcbiAgZGlzcGxheTogdGFibGU7XG59XG5oZWFkZXIgLnJlZ2lvbiA+ICosXG5mb290ZXIgLnJlZ2lvbiA+ICoge1xuICBkaXNwbGF5OiB0YWJsZS1jZWxsO1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICBwYWRkaW5nOiAwIDVweDtcbn1cbmhlYWRlciAucmVnaW9uID4gKiA+ICosXG5mb290ZXIgLnJlZ2lvbiA+ICogPiAqIHtcbiAgZGlzcGxheTogdGFibGUtY2VsbDtcbiAgdmVydGljYWwtYWxpZ246IHRvcDtcbn1cbm5hdiB1bCBsaSB7XG4gIGRpc3BsYXk6IHRhYmxlLWNlbGw7XG4gIHBhZGRpbmc6IDAgNXB4O1xufVxuLmRyb3Bkb3duLXRhcmdldCB7XG4gIGRpc3BsYXk6IGJsb2NrICFpbXBvcnRhbnQ7XG59XG5oZWFkZXIge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5oZWFkZXIgLmRyb3Bkb3duLW1lbnUge1xuICByaWdodDogM3B4O1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIG1hcmdpbi10b3A6IDE1cHg7XG59XG4udGFicyB7XG4gIGxpc3Qtc3R5bGU6IG5vbmU7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBib3gtc2l6aW5nOiBjb250ZW50LWJveDtcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNjY2M7XG59XG4udGFicyAqIHtcbiAgY29sb3I6ICNmZmY7XG4gIGZvbnQtc2l6ZTogMC45cmVtO1xufVxuLnRhYnMgbGkge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIG1hcmdpbjogMCAhaW1wb3J0YW50O1xuICBwYWRkaW5nOiAwICFpbXBvcnRhbnQ7XG59XG4udGFicyBpbnB1dFt0eXBlPVwicmFkaW9cIl0ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgbGVmdDogLTk5OTlweDtcbn1cbi50YWJzIGxhYmVsIHtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHBhZGRpbmc6IDRweCAxMXB4O1xuICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xuICBiYWNrZ3JvdW5kOiAjY2NjO1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbkBpbmNsdWRlIHRyYW5zaXRpb24oYWxsIDAuMnMgZWFzZS1pbi1vdXQpO1xuLnRhYnMgbGFiZWw6aG92ZXIge1xuICBiYWNrZ3JvdW5kOiAjYjNiM2IzO1xufVxuLnRhYnMgW2lkXj1cInRhYlwiXTpjaGVja2VkICsgbGFiZWwge1xuICB0b3A6IDA7XG4gIGJhY2tncm91bmQ6ICNhNmE2YTY7XG59XG4udGFicyBbaWRePVwidGFiXCJdOmNoZWNrZWQgfiBbaWRePVwidGFiLWNvbnRlbnRcIl0ge1xuICBkaXNwbGF5OiBibG9jaztcbn1cbmZvcm0gPiAqIHtcbiAgbWFyZ2luLWJvdHRvbTogMjBweDtcbn1cbmZvcm0gLmRlc2NyaXB0aW9uIHtcbiAgZm9udC1zaXplOiA3NSU7XG59XG5mb3JtIC5mb3JtLWl0ZW0uanMtZm9ybS10eXBlLWNoZWNrYm94IHtcbiAgZGlzcGxheTogdGFibGU7XG59XG5mb3JtIC5mb3JtLWl0ZW0uanMtZm9ybS10eXBlLWNoZWNrYm94IGxhYmVsIHtcbiAgcGFkZGluZy1sZWZ0OiAxMHB4O1xuICBmb250LXNpemU6IDc1JTtcbn1cbmZvcm0gLmZvcm0taXRlbS5qcy1mb3JtLXR5cGUtY2hlY2tib3ggaW5wdXQsXG5mb3JtIC5mb3JtLWl0ZW0uanMtZm9ybS10eXBlLWNoZWNrYm94IGxhYmVsIHtcbiAgZGlzcGxheTogdGFibGUtY2VsbDtcbiAgbWFyZ2luOiAwO1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuZm9ybSBpbnB1dFtkaXNhYmxlZF0ge1xuICBvcGFjaXR5OiAwLjM7XG59XG5mb3JtIGlucHV0LmVycm9yIHtcbiAgb3BhY2l0eTogMSAhaW1wb3J0YW50O1xuICBib3JkZXI6IDJweCBzb2xpZCAjZjAwO1xufVxuLnRhYmxlZHJhZy1jaGFuZ2VkIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICBib3JkZXItcmFkaXVzOiA1MCU7XG4gIHdpZHRoOiAyMHB4O1xuICBoZWlnaHQ6IDIwcHg7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgY29sb3I6ICNmMDA7XG59XG5hLnRhYmxlZHJhZy1oYW5kbGUge1xuICBoZWlnaHQ6IGluaGVyaXQgIWltcG9ydGFudDtcbn1cbmEudGFibGVkcmFnLWhhbmRsZX4udGFibGVkcmFnLWNoYW5nZWQge1xuICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG59XG5hLnRhYmxlZHJhZy1oYW5kbGUgLmhhbmRsZSB7XG4gIG1hcmdpbjogMDtcbiAgcGFkZGluZzogMDtcbiAgd2lkdGg6IDMwcHg7XG4gIGhlaWdodDogMzBweDtcbn1cbi5wbHVwbG9hZC1lbGVtZW50IC5wbHVwbG9hZF9maWxlbGlzdF9oZWFkZXIsXG4ucGx1cGxvYWQtZWxlbWVudCAucGx1cGxvYWRfZmlsZWxpc3RfZm9vdGVyIHtcbiAgaGVpZ2h0OiBpbmhlcml0O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG4ucGx1cGxvYWQtZWxlbWVudCAucGx1cGxvYWRfZmlsZWxpc3RfaGVhZGVyICosXG4ucGx1cGxvYWQtZWxlbWVudCAucGx1cGxvYWRfZmlsZWxpc3RfZm9vdGVyICoge1xuICBmb250LXNpemU6IDc1JTtcbn1cbi5wbHVwbG9hZC1lbGVtZW50IC5wbHVwbG9hZF9maWxlbGlzdF9oZWFkZXIgPiAqLFxuLnBsdXBsb2FkLWVsZW1lbnQgLnBsdXBsb2FkX2ZpbGVsaXN0X2Zvb3RlciA+ICoge1xuICBwYWRkaW5nOiAzcHg7XG4gIHRvcDogNTAlO1xufVxuIl19 */
