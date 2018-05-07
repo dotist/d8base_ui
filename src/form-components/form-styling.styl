@@ -1,0 +1,58 @@
+form
+  > *
+    margin-bottom 20px
+  .description
+    font-size 75%
+  .form-item
+    // example
+    &.js-form-type-checkbox
+      display table
+      label
+        padding-left 10px
+        font-size 75%
+      input
+      label
+        display table-cell
+        margin 0
+        vertical-align:middle
+  input
+    &[disabled]
+      opacity .3
+    &.error
+      opacity 1 !important
+      border 2px solid COLOR_WARNING
+
+// reset
+.paragraph-type-title
+  //
+
+.tabledrag-changed
+  text-decoration: none
+  // border 2px dotted red
+  border-radius 50%
+  width 20px
+  height 20px
+  display inline-block
+  color COLOR_RED
+a.tabledrag-handle
+  height inherit !important
+  &~.tabledrag-changed
+    padding-left 10px
+  .handle
+    margin 0
+    padding 0
+    width 30px
+    height 30px
+
+.plupload-element
+  .plupload_filelist_header
+  .plupload_filelist_footer
+    height inherit
+    position relative
+    *
+      font-size 75%
+    > *
+      padding 3px
+      top 50%
+
+

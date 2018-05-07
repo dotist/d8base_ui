@@ -1,0 +1,147 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the base_ui theme.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function base_ui_preprocess_html(array &$variables) {
+  $t=1;
+  /* Add class to html tag */
+  //$variables['html_attributes']->addClass('no-js');
+
+  // Don't display the site name twice on the front page (and potentially others)
+  /*if (isset($variables['head_title_array']['title']) && isset($variables['head_title_array']['name']) && ($variables['head_title_array']['title'] == $variables['head_title_array']['name'])) {
+    $variables['head_title'] = $variables['head_title_array']['name'];
+  }*/
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function base_ui_page_attachments_alter(array &$page) {
+  // Tell IE to use latest rendering engine (not to use compatibility mode).
+  /*$ie_edge = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => [
+    'http-equiv' => 'X-UA-Compatible',
+    'content' => 'IE=edge',
+    ],
+  ];
+  $page['#attached']['html_head'][] = [$ie_edge, 'ie_edge'];*/
+}
+
+/**
+ * Implements hook_preprocess_page() for page.html.twig.
+ */
+function base_ui_preprocess_page(array &$variables) {
+
+}
+
+
+/**
+ * Implements hook_preprocess_HOOK() for Block document templates.
+ */
+function base_ui_preprocess_block(array &$variables) {
+
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function base_ui_preprocess_node(array &$variables) {
+  $node = $variables['elements']['#node'];
+  $type = $node->getType();
+  $variables['attributes']['class'][] = 'content';
+  $variables['attributes']['class'][] = 'content-type-' . $type;
+  // Default to turning off byline/submitted.
+  //$variables['display_submitted'] = FALSE;
+}
+
+/**
+ * Implements hook_preprocess_form().
+ */
+function base_ui_preprocess_views_view(array &$variables) {
+  $t=1;
+  //$variables['attributes']['novalidate'] = 'novalidate';
+}
+
+/**
+ * Implements hook_preprocess_form().
+ */
+function base_ui_preprocess_form(array &$variables) {
+  //$variables['attributes']['novalidate'] = 'novalidate';
+}
+
+/**
+ * Implements hook_preprocess_select().
+ */
+function base_ui_preprocess_select(array &$variables) {
+  //$variables['attributes']['class'][] = 'select-chosen';
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function base_ui_preprocess_field(array &$variables, $hook) {
+  /*switch ($variables['element']['#field_name']) {
+  }*/
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function base_ui_preprocess_paragraph(array &$variables) {
+  if (isset($variables['paragraph'])) {
+    $paragraph = $variables['paragraph'];
+    // Add bundle type as attribute.
+    $bundle = $paragraph->bundle();
+    $variables['attributes']['paragraph-type'] = $bundle;
+    $variables['attributes']['view-mode'] = $variables['view_mode'];
+  }
+  /*switch ($variables['element']['#field_name']) {
+  }*/
+}
+
+/**
+ * Implements hook_preprocess_details().
+ */
+function base_ui_preprocess_details(array &$variables) {
+  /*$variables['attributes']['class'][] = 'details';
+  $variables['summary_attributes']['class'] = 'summary';*/
+}
+
+/**
+ * Implements hook_preprocess_menu_local_task().
+ */
+function base_ui_preprocess_menu_local_task(array &$variables) {
+  //$variables['element']['#link']['url']->setOption('attributes', ['class'=>'rounded']);
+}
+
+/**
+ * Implements hook_preprocess_menu_local_task().
+ */
+function base_ui_preprocess_page_title(array &$variables) {
+  $path = \Drupal::service('path.current')->getPath();
+  $array = explode('/', $path);
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    // Modify page title on node edit pages.
+    if (
+      (isset($array[1]) && isset($array[2]) && isset($array[3]))
+    &&
+      ($array[1] == 'node' && is_numeric((int) $array[2]) && $array[3] == 'edit')
+    ) {
+      $title = $variables['title'];
+      $bundle_label = \Drupal::entityTypeManager()
+        ->getStorage('node_type')
+        ->load($node->bundle())
+        ->label();
+      $variables['title'] = 'Edit ' . $bundle_label;
+    }
+  }
+
+}

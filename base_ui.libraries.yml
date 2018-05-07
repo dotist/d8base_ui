@@ -1,0 +1,18 @@
+base-theme:
+  version: 1.x
+  css:
+    layout:
+      css/styles.css: {}
+      # /libraries/milligram/dist/milligram.min.css: {}
+  js:
+    js/scripts.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - base_ui/velocity
+
+velocity:
+  version: 1.x
+  js:
+    /libraries/velocity/velocity.min.js: {}

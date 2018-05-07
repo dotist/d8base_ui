@@ -1,0 +1,65 @@
+$tabs-base-color = COLOR_GREY
+
+$tabs-font-color = COLOR_WHITE
+
+.tabs {
+  list-style: none;
+  text-align: left;
+  display: block;
+  box-sizing: content-box;
+  border-bottom: 1px solid $tabs-base-color;
+  * {
+    color: $tabs-font-color;
+    font-size: 0.9rem;
+  }
+  li {
+    display: inline-block;
+    margin: 0!important;
+    padding: 0!important;
+  }
+  input[type="radio"] {
+    position: absolute;
+    top: 0;
+    left: -9999px;
+  }
+  label {
+    display: block;
+    // padding: 4px 11px;
+    // border-radius: 2px 2px 0 0;
+    text-transform: uppercase;
+    background: $tabs-base-color;
+    cursor: pointer;
+    position: relative;
+    a {
+      @include transition(all 0.5s ease-in-out);
+      background inherit
+    }
+    a:hover {
+      background: darken($tabs-base-color, 50);
+    }
+  }
+  // .tab-content{
+  //   z-index: 2;
+  //   display: none;
+  //   overflow: hidden;
+  //   width: 100%;
+  //   font-size: 17px;
+  //   line-height: 25px;
+  //   padding: 25px;
+  //   position: absolute;
+  //   top: 53px;
+  //   left: 0;
+  //   background: darken($tabs-base-color, 15);
+  // }
+  //The Magic
+  [id^="tab"]:checked + label
+  [id^="tab"]:checked + label a
+  {
+    top: 0;
+    // padding-top: 17px;
+    background: darken($tabs-base-color, 15);
+  }
+  [id^="tab"]:checked ~ [id^="tab-content"] {
+    display: block;
+  }
+}
