@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     rupture = require('rupture'),
     livereload = require('gulp-livereload');
 
+// Compile main styles.
 gulp.task('stylus', function() {
   return gulp.src('src/index.styl')
     .pipe(stylus({
@@ -25,6 +26,26 @@ gulp.task('stylus', function() {
     ]))
     .pipe(sourcemaps.write())
     .pipe(concat('styles.css'))
+    .pipe(gulp.dest('css/'));
+});
+
+// Compile CCK editor styles.
+gulp.task('stylus', function() {
+  return gulp.src('src/editor.styl')
+    .pipe(stylus({
+      linenos: false,
+      use: [
+        nib(),
+        rupture()
+      ],
+    }))
+    .pipe(sourcemaps.init())
+    .pipe(postcss([
+      lost(),
+      autoprefixer()
+    ]))
+    .pipe(sourcemaps.write())
+    .pipe(concat('editor.css'))
     .pipe(gulp.dest('css/'));
 });
 
