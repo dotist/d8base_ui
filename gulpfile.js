@@ -30,24 +30,24 @@ gulp.task('stylus', function() {
 });
 
 // Compile CCK editor styles.
-gulp.task('stylus', function() {
-  return gulp.src('src/editor.styl')
-    .pipe(stylus({
-      linenos: false,
-      use: [
-        nib(),
-        rupture()
-      ],
-    }))
-    .pipe(sourcemaps.init())
-    .pipe(postcss([
-      lost(),
-      autoprefixer()
-    ]))
-    .pipe(sourcemaps.write())
-    .pipe(concat('editor.css'))
-    .pipe(gulp.dest('css/'));
-});
+// gulp.task('stylus', function() {
+//   return gulp.src('src/editor.styl')
+//     .pipe(stylus({
+//       linenos: false,
+//       use: [
+//         nib(),
+//         rupture()
+//       ],
+//     }))
+//     .pipe(sourcemaps.init())
+//     .pipe(postcss([
+//       lost(),
+//       autoprefixer()
+//     ]))
+//     .pipe(sourcemaps.write())
+//     .pipe(concat('editor.css'))
+//     .pipe(gulp.dest('css/'));
+// });
 
 gulp.task('build', ['stylus']);
 

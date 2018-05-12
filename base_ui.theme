@@ -87,9 +87,78 @@ function base_ui_preprocess_select(array &$variables) {
 /**
  * Implements hook_preprocess_field().
  */
+use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
 function base_ui_preprocess_field(array &$variables, $hook) {
-  /*switch ($variables['element']['#field_name']) {
-  }*/
+  if (isset($variables['entity_type']) && $variables['entity_type'] == 'paragraph') {
+    $bundle = $variables['element']['#object']->bundle();
+    if ($bundle == 'image') {
+      if ($variables['element']['#field_name'] == 'field_image') {
+
+
+      }
+    }
+  }
+  switch($variables['element']['#field_name']) {
+    // Apply featherlight-slideshow attributes to node-bundled image field elements,
+    // so that display-image & paragraph image fields are one featherlight gallery.
+    case 'field_image':
+      $field_name = $variables['element']['#field_name'];
+      if (isset($variables['entity_type']) && $variables['entity_type'] == 'paragraph') {
+        $bundle = $variables['element']['#object']->bundle();
+        if ($bundle == 'image') {
+          // Create link to image in large image-style.
+          // @TODO: transition to responsive image style.
+          $image = $variables['element'][0];
+          $uri = $variables['element']['#object']->get($field_name)->entity->getFileUri();
+          $style_url = ImageStyle::load('max_1300x1300')->buildUrl($uri);
+          $url = Url::fromUri($style_url);
+          $link_options = [
+            'attributes' => [
+              'data-featherlight' => 'image',
+              'featherlight-item' => '',
+            ],
+          ];
+          $url->setOptions($link_options);
+          // Create link to image-style on the image element & replace the standard render element.
+          $link = Link::fromTextAndUrl($image, $url);
+          $variables['items'][0]['content'] = $link;
+          // Add caption as attribute.
+            // @todo - how to add caption as field attribute beforehand?
+        }
+      }
+      break;
+    case 'field_image_main':
+      $field_name = $variables['element']['#field_name'];
+      if (isset($variables['element']['#object'])) {
+        if ($variables['element']['#object']->bundle() == 'exhibition') {
+          // @Edit - copied from above - create a Class.
+          $image = $variables['element'][0];
+          $uri = $variables['element']['#object']->get($field_name)->entity->getFileUri();
+          $style_url = ImageStyle::load('max_1300x1300')->buildUrl($uri);
+          $url = Url::fromUri($style_url);
+          $link_options = [
+            'attributes' => [
+              'data-featherlight' => 'image',
+              'featherlight-item' => '',
+            ],
+          ];
+          $url->setOptions($link_options);
+          // Create link to image-style on the image element & replace the standard render element.
+          $link = Link::fromTextAndUrl($image, $url);
+          $variables['items'][0]['content'] = $link;
+        }
+
+      }
+
+      break;
+    // Set Featherlight gallery (wrapper) attributes.
+    case 'field_images':
+      // $variables['attributes']['data-featherlight-gallery'] = '';
+      // $variables['attributes']['data-featherlight-filter'] = 'a';
+      break;
+  }
 }
 
 /**
@@ -103,8 +172,11 @@ function base_ui_preprocess_paragraph(array &$variables) {
     $variables['attributes']['paragraph-type'] = $bundle;
     $variables['attributes']['view-mode'] = $variables['view_mode'];
   }
-  /*switch ($variables['element']['#field_name']) {
-  }*/
+  // switch ($variables['element']['#field_name']) {
+  //   case 'field_image':
+
+  //     break;
+  // }
 }
 
 /**

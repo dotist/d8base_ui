@@ -4,3 +4,71 @@ main
   > *
     > *
       padding-bottom 15px
+
+  article
+    > div
+      > .field
+        margin-bottom 20px
+    &.content-type-exhibition
+      h1
+        margin 30px 0 23px 0
+      .field--name-field-images > .field__items
+      .field--name-field-images.field__items
+        lost-masonry-wrap: no-flex;
+        > .field__item
+          lost-masonry-column 1/2
+          // lost-column 1/2
+          // width 50%
+
+    // Artists content page
+    &.content-type-artist
+      > div
+        h1
+        #page-tabs__tab-labels
+          lost-column 1/2
+        #page-tabs
+          padding-top 100px
+        .field--name-field-images.field--type-entity-reference-revisions
+          > .field__items > .field__item
+            margin-bottom 60px
+            .field--name-field-image
+              margin-bottom: 20px
+
+
+
+
+
+
+.text-formatted
+  margin-bottom 20px
+  h2
+  h3
+    margin 0
+    + p
+      margin-top 3px
+  blockquote
+    padding 20px 20px 20px 20px !important
+    margin 0
+    display block
+    clear both
+    overflow: auto
+    p
+      font-style: italic
+      font-weight: 300
+      margin 0 !important
+      padding 0 !important
+      letter-spacing: 1px
+      &:last-child
+        float right
+        margin-right -20px !important
+        line-height: 0
+        font-style: normal
+
+      &:first-child
+        float none
+        text-align: center
+  li
+    line-height: 1.7rem
+    // 'hanging'-indent like so ->
+    text-indent: -30px;
+    padding-left: 30px;

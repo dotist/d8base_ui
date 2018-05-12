@@ -6,6 +6,9 @@
    * @param {*}
    */
 
+  /**
+   * Initialize off-canvas menu.
+   */
   Drupal.behaviors.offCanvasMenuInit = {
     attach: function (context, settings) {
       $('.main-menu', context).once('offCanvasMenuInit').each(function () {
@@ -23,10 +26,12 @@
     }
   };
 
+  /**
+   * Position off-canvas menu.
+   */
   Drupal.behaviors.offCanvasMenuPosition = {
     attach: function (context, settings) {
       function offCanvasMenuPosition() {
-        console.log('re pos')
         $('[off-canvas-menu] > ul', context).once('offCanvasMenuPosition').each(function () {
           // console.log('menu pos')
           var $menu = $(this);
@@ -112,12 +117,106 @@
     }
   };
 
-  Drupal.behaviors.offCanvasResize = {
+  /**
+   * Initialize Featherlight Slideshow elements.
+   */
+  Drupal.behaviors.featherlightSlideshow = {
     attach: function (context, settings) {
 
-      // Usage
-    }
+      $('a[featherlight-item]').featherlightGallery({
+        previousIcon: '«',
+        nextIcon: '»',
+        galleryFadeIn: 300,
+        openSpeed: 300
+      });
 
+      $.featherlightGallery.prototype.afterContent = function() {
+        var caption = this.$currentTarget.find('img').attr('title');
+        this.$instance.find('.caption').remove();
+        $('<div class="caption">').text(caption).appendTo(this.$instance.find('.featherlight-content'));
+      };
+
+    }
+  }
+
+  /**
+   * Inititalize page-tab items. Currently only works with one per page.
+   */
+  Drupal.behaviors.pageTabs = {
+    attach: function (context, settings) {
+      $('#page-tabs', context).once('pageTabs').each(function () {
+        // Create Tabmenu & controls.
+        var $pageTabs = $(this);
+        let tabs = $pageTabs.find('[page-tab]');
+        $pageTabs.find('[page-tab]').first().addClass('active');
+        let tabLabelSelector = 'page-tabs__tab-labels';
+        let tabLabelWrapper = '<ul id="' + tabLabelSelector + '">';
+        $(tabLabelWrapper).insertBefore($pageTabs);
+        let $tabLabelWrapper = $('#' + tabLabelSelector);
+        $tabLabelWrapper.attr('page-tabs-labels', '');
+        $.each(tabs, function(i){
+          let $tab = $(this);
+          let $label = $tab.find('.field__label').first();
+          let $tabItem = $('<li><a href="#">');
+          $tabLabelWrapper.append($tabItem);
+          let $tabLink = $tabLabelWrapper.find('a').last();
+
+          // Insert text from corresponding field-label.
+          $tabLink.text($label.text()).attr('page-tab-index', $(this).attr('page-tab'));
+
+          // Click function.
+          $tabLink.click(function(e){
+            // e.preventDefault();
+            let index = $(this).attr('page-tab-index');
+            // Reset active link settings.
+            $tabLabelWrapper.find('li').removeClass('active-trail').find('a').removeClass('active').parent();
+            $(this).addClass('active').parent().addClass('active-trail');
+            // Reset active tab settings.
+            $pageTabs.find('[page-tab].active').removeClass('active');
+            $pageTabs.find('[page-tab="' + index + '"]').addClass('active');
+            // @TODO : add ?parameters to allow direct links.
+            // var loc = location.href;
+            // loc += loc.indexOf("?") === -1 ? "?" : "&";
+            // location.href = loc + "?page-tab-index=" + index;
+          });
+
+        });
+
+      });
+    }
+  }
+
+  /**
+   * Custom UI for pageTabs menu behavior
+   */
+  Drupal.behaviors.pageTabsUI = {
+    attach: function (context, settings) {
+      $('[page-tabs-labels]', context).once('pageTabsUI').each(function () {
+        let $labels = $(this);
+        $labels.find('li').first().appendTo($(this)).addClass('hide-on-load');
+        $labels.find('a').click(function(){
+          $labels.find('li').removeClass('hide-on-load');
+        });
+      });
+    }
+  }
+
+  /**
+   * Init Masonry grids.
+   */
+  Drupal.behaviors.masonryInit = {
+    attach: function (context, settings) {
+      let selector = '.content-type-exhibition .field--name-field-images.field--type-entity-reference-revisions';
+      $(selector, context).once('masonryInit').each(function () {
+        let $masonry = $(this);
+        $masonry.imagesLoaded( function() {
+          $masonry.masonry({
+            itemSelector: '.masonry-item',
+            columnWidth: '.masonry-item'
+          });
+        });
+      });
+    }
   }
 
   })(jQuery);

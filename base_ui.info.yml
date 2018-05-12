@@ -5,6 +5,11 @@ package: base_ui
 core: 8.x
 libraries:
   - base_ui/base-theme
+  - base_ui/velocity
+  - base_ui/featherlight
+  - base_ui/detect-swipe
+  - base_ui/masonry
+  - base_ui/imagesloaded
 
 base theme: classy
 

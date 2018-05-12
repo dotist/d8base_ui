@@ -10,9 +10,37 @@ base-theme:
     - core/drupal
     - core/jquery
     - core/jquery.once
-    - base_ui/velocity
+    # - base_ui/velocity
+    # - base_ui/featherlight
+    # - base_ui.detect-swipe
 
 velocity:
   version: 1.x
   js:
     /libraries/velocity/velocity.min.js: {}
+
+featherlight:
+  version: 1.x
+  css:
+    layout:
+      /libraries/featherlight/release/featherlight.min.css: {}
+      /libraries/featherlight/release/featherlight.gallery.min.css: {}
+  js:
+    /libraries/featherlight/release/featherlight.min.js: {}
+    /libraries/featherlight/release/featherlight.gallery.min.js: {}
+
+detect-swipe:
+  version: 1.x
+  js:
+    /libraries/detect_swipe/jquery.detect_swipe.js: {}
+
+masonry:
+  version: 1.x
+  js:
+    /libraries/masonry/dist/masonry.pkgd.min.js: {}
+
+imagesloaded:
+  version: 1.x
+  js:
+    /libraries/imagesloaded/imagesloaded.pkgd.min.js: {}
+

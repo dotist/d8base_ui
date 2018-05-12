@@ -1,0 +1,28 @@
+#page-tabs
+  clear both
+  [page-tab]
+    opacity 0
+    position relative
+    max-height 0
+    transition all 300ms
+    height 0
+    &.active
+      display block
+      max-height inherit
+      opacity 1
+      height auto
+
+[page-tabs-labels]
+  li
+    transition all 400ms
+    opacity 1
+    height auto
+    max-height 100px
+    a
+      transition all 400ms
+      &.active
+        text-decoration: underline
+    &.hide-on-load
+      opacity 0
+      max-height: 0
+      height 0
