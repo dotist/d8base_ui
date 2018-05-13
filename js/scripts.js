@@ -57,29 +57,7 @@
             $menu.parent().toggleClass('menu-closed');
             $('body').toggleClass('off-canvas-menu-active');
             let $logo = $('.site-branding');
-            if (status == 1) {
-              // Hide menu & element.
-              $canvas.velocity({
-                'opacity': 0,
-              }, {
-                complete: function(elements) {
-                  $canvas.css({
-                    'z-index': -1,
-                    'display': 'none',
-                  });
-                }
-              });
-            }
-            else {
-
-              $canvas.velocity({
-                'opacity': 0.8,
-              }).css({
-                'z-index': 1,
-                'display': 'block',
-              });;
-
-            }
+            $canvas.toggleClass('active');
           }
 
           let $burger = $menu.siblings('img[burger]');
@@ -214,6 +192,57 @@
             itemSelector: '.masonry-item',
             columnWidth: '.masonry-item'
           });
+        });
+      });
+    }
+  }
+
+  /**
+   * Init dropdown menus.
+   */
+  Drupal.behaviors.dropdownMenu = {
+    attach: function (context, settings) {
+      $('.dropdown-menu', context).once('dropdownMenu').each(function () {
+        function toggleDropdown($menu, $submenu, $link, clickEvent, override = null) {
+          if (override == -1) {
+            $menu.find('a.active').removeClass('active');
+            $menu.find('ul.submenu-open').removeClass('submenu-open');
+            $menu.attr('dropdown-active', 0);
+            $canvas.removeClass('active');
+            return false;
+          }
+          if ($submenu.length != 0) {
+            clickEvent.preventDefault();
+
+            // Toggle out any currently active menus.
+            let $siblings = $link.parent().siblings('li');
+            $siblings.find('a.active').removeClass('active');
+            $siblings.find('ul.submenu-open').removeClass('submenu-open');
+            // Toggle active submenu.
+            $link.toggleClass('active');
+            $submenu.toggleClass('submenu-open');
+            // Global menu settings.
+            if($menu.find('a.active').length > 0) {
+              $menu.attr('dropdown-active', 1);
+              $canvas.addClass('active')
+            }
+            else {
+              $menu.attr('dropdown-active', 0);
+              $canvas.removeClass('active')
+            }
+          }
+        }
+        let $menu = $(this);
+        $menu.attr('dropdown-active', 0);
+        let $canvas = $('#off-canvas-menu-pseudo-canvas');
+        $menu.find('li a').click(function(e){
+          let $link = $(this);
+          let $submenu = $link.siblings('ul');
+          // If submenu exists under this link, toggle open.
+          toggleDropdown($menu, $submenu, $link, e);
+        });
+        $canvas.click(function(e){
+          toggleDropdown($menu, false, false, e, -1);
         });
       });
     }

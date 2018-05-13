@@ -1,22 +1,28 @@
 main
   // padding 15px 15px 0 15px
   margin-top 80px
-  > *
-    > *
-      padding-bottom 15px
+  // > *
+  //   > *
+  //     padding-bottom 15px
+  .block
+    > .field
+      margin-bottom 20px
 
   article
     > div
       > .field
         margin-bottom 20px
+    // Exhibition content page
     &.content-type-exhibition
       h1
         margin 30px 0 23px 0
       .field--name-field-images > .field__items
       .field--name-field-images.field__items
+        margin-top 40px
         lost-masonry-wrap: no-flex;
         > .field__item
           lost-masonry-column 1/2
+          margin-bottom 20px
           // lost-column 1/2
           // width 50%
 
@@ -33,14 +39,26 @@ main
             margin-bottom 60px
             .field--name-field-image
               margin-bottom: 20px
+            .field--name-field-caption
+              lost-column 1/2
+              float none !important
 
 
-
+// Info page.
+.page-node-type-page
+  main
+    #block-googlemap
+      margin-bottom 60px
+      .field--name-field-iframe
+        .field__item
+          height 350px
+    #block-contactblock
+      //
 
 
 
 .text-formatted
-  margin-bottom 20px
+  margin-bottom 60px
   h2
   h3
     margin 0

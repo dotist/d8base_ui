@@ -8,27 +8,55 @@ footer
   .region
     height Height
     display: table
-    // > *
-    //   display: table-cell
-    //   vertical-align: middle;
-    //   padding 0 5px
-      // > *
-      //   display: table-cell;
-      //   vertical-align: top;
-
-// nav
-//   ul
-//     li
-//       display table-cell
-//       padding 0 5px
-
-// Burger-nav styling.
-.dropdown-target
-  display block !important
 
 header
   position relative
-  .dropdown-menu
-    right 3px
+  #block-mainnavigation.main-menu
     position: absolute
-    margin-top 15px
+    z-index 1
+    right 0
+    &[dropdown-active="1"]
+      z-index 2
+    > ul
+      display table
+      > li
+        display table-cell
+        padding 0 10px
+
+nav
+  ul
+    li
+      a
+        &:hover
+          // border-bottom 1px solid black
+          text-decoration: underline
+
+  &.dropdown-menu
+    > ul
+      > li
+        > ul
+        > ul  >li
+          // opacity 0
+        > ul
+          // background COLOR_WHITE
+          display: block;
+          position: absolute;
+          min-width: 200px;
+
+          z-index: 1;
+          // background-color lighten(COLOR_BACKGROUND, 20%)
+          max-height 0
+          padding 0
+          overflow hidden
+          opacity 0
+          transition: all 200ms
+          margin-left -18px
+          padding: 13px 5px 13px 20px
+          > li
+            padding 3px 2px 3px 0
+          &.submenu-open
+            opacity 1
+            max-height: 1000px
+            // padding: 13px 5px 13px 20px
+            > li
+              // max-height: 200px

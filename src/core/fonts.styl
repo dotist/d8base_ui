@@ -11,6 +11,8 @@ body *
   line-height: 1.5;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   // font-weight: 300;
+  div
+    line-height: 0
 
 html body
   main
@@ -52,16 +54,14 @@ h6 {
   margin-top: 0;
 }
 
-h1 {
-  font-size: 4.6rem;
-  line-height: 1.2;
-}
-
-article.content
-  h1
-    font-size 1.5rem
-  h2
-    font-size: 1.3rem;
+h1
+  font-size 1.5rem
+h2
+  font-size: 1.3rem;
+h3
+  font-size: 1.1rem;
+h4, h5, h6
+  font-size: 1rem;
 
 
 
@@ -121,10 +121,17 @@ a:visited
 a:active
   color COLOR_DARK_BLACK
   text-decoration none
-main a:hover
-  // border-bottom 1px solid COLOR_DARK_BLACK
+
+main
+  article
+    h1, h2, h3, li
+      a
+        padding-bottom 2px
+        &:hover
+          border-bottom 1px solid black
 
 html .field__label // needs a wrapper to override field.css
   font-weight: 200
   font-style italic
   letter-spacing 1px
+  line-height: 1.5

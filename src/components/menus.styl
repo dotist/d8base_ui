@@ -1,9 +1,10 @@
-// +below(2)
-//   .dropdown-menu
-//     display none !important
-// +above(2)
-//   .dropdown-menu
-//     display unset
-
-
-
++below(2)
+  #block-mainnavigation.main-menu
+    display none !important
+  .off-canvas-menu.main-menu
+    display block !important
++above(2)
+  #block-mainnavigation.main-menu
+    display unset
+  .off-canvas-menu.main-menu
+    display none
